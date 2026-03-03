@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nur eine Karte 🃏</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="scene" id="scene">
+
+    <!-- Envelope / Card wrapper -->
+    <div class="envelope-wrapper" id="envelope-wrapper">
+      <div class="envelope" id="envelope">
+        <div class="envelope-flap"></div>
+        <div class="envelope-body">
+          <p class="tap-hint">Tippen zum Öffnen</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- The card itself, revealed after envelope opens -->
+    <div class="card-wrapper hidden" id="card-wrapper">
+      <div class="card" id="card">
+        <div class="card-front">
+          <div class="card-corner top-left">♠</div>
+          <div class="card-corner top-right">♥</div>
+          <div class="card-center">
+            <span class="card-title">Nur eine Karte</span>
+            <span class="card-subtitle">Du hast gesagt, du willst nur eine Karte.</span>
+            <span class="card-sub2">Du hast sie.</span>
+          </div>
+          <div class="card-corner bottom-left">♣</div>
+          <div class="card-corner bottom-right">♦</div>
+          <p class="flip-hint">Umdrehen ↩</p>
+        </div>
+        <div class="card-back">
+          <div class="puns-container" id="puns-container">
+            <!-- Puns injected by JS -->
+          </div>
+          <button class="next-btn" id="next-btn">Nächster Pun ↓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final message -->
+    <div class="final-message hidden" id="final-message">
+      <div class="final-inner">
+        <p class="final-emoji">🎂</p>
+        <p class="final-title">Alles Gute zum Geburtstag!</p>
+        <p class="final-body">
+          Du hast um eine Karte gebeten. Wir haben geliefert.<br />
+          Technisch gesehen.<br />
+          <em>Card-lich Glückwunsch.</em>
+        </p>
+        <p class="final-suits">♠ ♥ ♣ ♦</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
