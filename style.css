@@ -91,6 +91,7 @@ body::before {
   inset: 0;
   z-index: 1;
   background: #a06818;
+  border-radius: 0 0 var(--radius) var(--radius);
 }
 
 .envelope-paper::after {
