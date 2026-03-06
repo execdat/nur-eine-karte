@@ -69,12 +69,13 @@ body::before {
    ===================== */
 .envelope-wrapper {
   cursor: pointer;
-  perspective: 800px;
 }
 
 .envelope {
   width: 320px;
+  height: 220px;
   position: relative;
+  perspective: 800px;
   filter: drop-shadow(0 8px 32px rgba(0,0,0,.6));
   transition: transform .2s ease;
 }
@@ -83,56 +84,91 @@ body::before {
   transform: scale(1.03);
 }
 
-.envelope-flap {
-  width: 0;
-  height: 0;
-  border-left: 160px solid transparent;
-  border-right: 160px solid transparent;
-  border-top: 120px solid var(--gold);
-  position: relative;
+/* Paper sits behind all body pieces — revealed through the flap opening.
+   Background is the envelope interior colour (dark amber). */
+.envelope-paper {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #a06818;
+}
+
+.envelope-paper::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72%;
+  height: 128px;
+  background: #fffdf7;
+  border-radius: 3px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.2);
+}
+
+/* Three body pieces — each covers one region of the envelope face.
+   Flap tip is at (50%, 54.55%) = (160px, 120px) in the 320×220 envelope.
+   background-size + background-position make the gradient continuous across
+   all pieces as if painted on the full 320×220 envelope at once. */
+.envelope-side,
+.envelope-bottom {
+  position: absolute;
+  background: linear-gradient(160deg, var(--gold) 0%, var(--gold-dark) 100%);
+  background-size: 320px 220px;
+  background-repeat: no-repeat;
   z-index: 2;
-  transition: transform .6s ease, opacity .4s ease;
+}
+
+/* Right-angle triangles that only reach the flap-tip height — no bottom corners. */
+.envelope-side {
+  inset: 0;
+}
+
+.envelope-side--left  { clip-path: polygon(0% 0%, 50% 54.55%, 0% 54.55%); }
+.envelope-side--right { clip-path: polygon(100% 0%, 100% 54.55%, 50% 54.55%); }
+
+/* Plain rectangle from the flap tip down — overlaps sides by 1px to
+   cover any anti-aliasing gap, and uses border-radius normally. */
+.envelope-bottom {
+  top: 119px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-position: 0 -119px;
+  border-radius: 0 0 var(--radius) var(--radius);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 22px;
+}
+
+/* Shadow cast by the flap — sits above body pieces, below the flap */
+.envelope-flap-shadow {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: rgba(0,0,0,.18);
+  clip-path: polygon(0% 0%, 100% 0%, 50% 54.55%);
+}
+
+/* Flap overlaps the top of the body. clip-path gives a real element size
+   so transform-origin: top center lands exactly on the fold edge. */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: var(--gold-dark);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center;
+  z-index: 4;
+  transition: transform .6s ease;
 }
 
 .envelope.open .envelope-flap {
   transform: rotateX(-180deg);
-  opacity: 0;
-}
-
-.envelope-body {
-  width: 320px;
-  height: 220px;
-  background: linear-gradient(160deg, var(--gold) 0%, var(--gold-dark) 100%);
-  border-radius: 0 0 var(--radius) var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-}
-
-.envelope-body::before,
-.envelope-body::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  width: 0;
-  height: 0;
-}
-
-.envelope-body::before {
-  left: 0;
-  border-bottom: 220px solid var(--bg2);
-  border-right: 160px solid transparent;
-  opacity: .15;
-}
-
-.envelope-body::after {
-  right: 0;
-  border-bottom: 220px solid var(--bg2);
-  border-left: 160px solid transparent;
-  opacity: .15;
 }
 
 .tap-hint {
