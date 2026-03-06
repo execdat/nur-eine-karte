@@ -25,26 +25,63 @@
       </div>
     </div>
 
-    <!-- The card itself, revealed after envelope opens -->
+    <!-- The 3 mini cards + ticker, revealed after envelope opens -->
     <div class="card-wrapper hidden" id="card-wrapper">
-      <div class="card" id="card">
-        <div class="card-front">
-          <div class="card-corner top-left">♠</div>
-          <div class="card-corner top-right">♥</div>
-          <div class="card-center">
-            <span class="card-title">Nur eine Karte</span>
-            <span class="card-subtitle">Du hast gesagt, du willst nur eine Karte.</span>
-            <span class="card-sub2">Du hast sie.</span>
+      <p class="mini-hint">Tippen zum Umdrehen</p>
+
+      <div class="mini-cards">
+
+        <!-- Card 1 -->
+        <div class="mini-card" id="mini-card-0">
+          <div class="mini-card-inner">
+            <div class="mini-card-front">
+              <span class="mc-corner mc-tl">♠</span>
+              <div class="qr-placeholder"><span>QR</span></div>
+              <span class="mc-corner mc-br">♣</span>
+            </div>
+            <div class="mini-card-back">
+              <!-- Riddle 1 — edit text here -->
+              <p class="riddle-text">Rätsel 1<br/>kommt hier hin.</p>
+            </div>
           </div>
-          <div class="card-corner bottom-left">♣</div>
-          <div class="card-corner bottom-right">♦</div>
-          <p class="flip-hint">Umdrehen ↩</p>
         </div>
-        <div class="card-back">
-          <div class="puns-container" id="puns-container">
-            <!-- Puns injected by JS -->
+
+        <!-- Card 2 -->
+        <div class="mini-card" id="mini-card-1">
+          <div class="mini-card-inner">
+            <div class="mini-card-front">
+              <span class="mc-corner mc-tl mc-corner--red">♥</span>
+              <div class="qr-placeholder"><span>QR</span></div>
+              <span class="mc-corner mc-br mc-corner--red">♦</span>
+            </div>
+            <div class="mini-card-back">
+              <!-- Riddle 2 — edit text here -->
+              <p class="riddle-text">Rätsel 2<br/>kommt hier hin.</p>
+            </div>
           </div>
-          <button class="next-btn" id="next-btn">Nächster Pun ↓</button>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="mini-card" id="mini-card-2">
+          <div class="mini-card-inner">
+            <div class="mini-card-front">
+              <span class="mc-corner mc-tl">♣</span>
+              <div class="qr-placeholder"><span>QR</span></div>
+              <span class="mc-corner mc-br">♠</span>
+            </div>
+            <div class="mini-card-back">
+              <!-- Riddle 3 — edit text here -->
+              <p class="riddle-text">Rätsel 3<br/>kommt hier hin.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pun news ticker -->
+      <div class="ticker-wrapper">
+        <div class="ticker-track" id="ticker-track">
+          <!-- filled by JS from PUNS array -->
         </div>
       </div>
     </div>

@@ -199,134 +199,111 @@ body::before {
 }
 
 /* =====================
-   Card
+   Card wrapper (post-envelope reveal)
    ===================== */
 .card-wrapper {
-  perspective: 1200px;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
-.card {
-  width: 300px;
-  height: 460px;
+.mini-hint {
+  font-size: .85rem;
+  color: var(--gold-dark);
+  opacity: .8;
+  letter-spacing: .05em;
+}
+
+/* =====================
+   Mini playing cards
+   ===================== */
+.mini-cards {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.mini-card {
+  width: 125px;
+  height: 175px;
+  perspective: 600px;
+  cursor: pointer;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,.6));
+}
+
+.mini-card-inner {
+  width: 100%;
+  height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform .7s cubic-bezier(.4, 0, .2, 1);
-  filter: drop-shadow(0 12px 40px rgba(0,0,0,.7));
+  transition: transform .6s cubic-bezier(.4, 0, .2, 1);
 }
 
-.card.flipped {
+.mini-card.flipped .mini-card-inner {
   transform: rotateY(180deg);
 }
 
-.card-front,
-.card-back {
+.mini-card-front,
+.mini-card-back {
   position: absolute;
   inset: 0;
-  border-radius: var(--radius);
+  border-radius: 10px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-/* Front */
-.card-front {
+.mini-card-front {
   background: var(--card-bg);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-columns: auto 1fr auto;
-  padding: 16px;
-  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.card-corner {
-  font-size: 1.6rem;
-  line-height: 1;
+.mc-corner {
+  position: absolute;
+  font-size: .8rem;
   font-weight: bold;
   user-select: none;
+  line-height: 1;
+  color: var(--card-black);
 }
 
-.top-left  { grid-area: 1 / 1; color: var(--card-black); }
-.top-right { grid-area: 1 / 3; color: var(--card-red);   }
-.bottom-left  { grid-area: 3 / 1; color: var(--card-red);   transform: rotate(180deg); }
-.bottom-right { grid-area: 3 / 3; color: var(--card-black); transform: rotate(180deg); }
+.mc-corner--red { color: var(--card-red); }
 
-.card-center {
-  grid-area: 2 / 1 / 3 / 4;
+.mc-tl { top: 6px; left: 6px; }
+.mc-br { bottom: 6px; right: 6px; transform: rotate(180deg); }
+
+.qr-placeholder {
+  width: 78px;
+  height: 78px;
+  border: 2px dashed #bbb;
+  border-radius: 4px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 12px;
-  text-align: center;
+  font-size: .7rem;
+  color: #bbb;
+  font-family: monospace;
+  letter-spacing: .08em;
 }
 
-.card-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--card-black);
-  letter-spacing: .04em;
-}
-
-.card-subtitle {
-  font-size: .95rem;
-  color: #555;
-  font-style: italic;
-  line-height: 1.5;
-}
-
-.card-sub2 {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: var(--card-red);
-}
-
-.flip-hint {
-  grid-area: 3 / 1 / 4 / 4;
-  text-align: center;
-  font-size: .8rem;
-  color: #999;
-  padding-top: 4px;
-}
-
-/* Back */
-.card-back {
+.mini-card-back {
   background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%);
-  border: 3px solid var(--gold);
+  border: 2px solid var(--gold);
+  border-radius: 10px;
   transform: rotateY(180deg);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 28px 20px 20px;
-}
-
-.puns-container {
-  flex: 1;
-  display: flex;
   align-items: center;
   justify-content: center;
+  padding: 12px 10px;
 }
 
-.pun-text {
-  font-size: 1.1rem;
+.riddle-text {
+  font-size: .78rem;
   text-align: center;
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--text-light);
-  padding: 0 8px;
-  animation: fadeIn .5s ease;
-}
-
-.pun-text em {
-  color: var(--gold);
-  font-style: normal;
-}
-
-.pun-number {
-  font-size: .75rem;
-  color: var(--gold-dark);
-  margin-bottom: 8px;
-  letter-spacing: .1em;
 }
 
 @keyframes fadeIn {
@@ -334,27 +311,50 @@ body::before {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.next-btn {
-  background: var(--gold);
-  color: var(--bg);
-  border: none;
-  border-radius: 999px;
-  padding: 10px 24px;
-  font-size: .9rem;
-  font-family: inherit;
-  font-weight: bold;
-  cursor: pointer;
-  letter-spacing: .05em;
-  transition: background .2s, transform .15s;
+/* =====================
+   Pun ticker
+   ===================== */
+.ticker-wrapper {
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  overflow: hidden;
+  border-top: 1px solid rgba(240,192,64,.25);
+  border-bottom: 1px solid rgba(240,192,64,.25);
+  padding: 10px 0;
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
-.next-btn:hover {
-  background: #ffe070;
-  transform: scale(1.04);
+.ticker-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: tickerScroll 64s linear infinite;
+  font-size: .82rem;
+  color: var(--gold-dark);
 }
 
-.next-btn:active {
-  transform: scale(.97);
+.ticker-set {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ticker-pun {
+  flex-shrink: 0;
+  padding: 0 8px;
+}
+
+.ticker-pun::after {
+  content: '♦';
+  padding: 0 20px;
+  color: var(--gold);
+  opacity: 0.5;
+}
+
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 /* =====================
@@ -402,13 +402,16 @@ body::before {
 /* =====================
    Responsive
    ===================== */
-@media (max-width: 400px) {
-  .envelope { width: 280px; }
-  .envelope-flap {
-    border-left-width: 140px;
-    border-right-width: 140px;
+@media (max-width: 380px) {
+  .mini-card {
+    width: 100px;
+    height: 140px;
   }
-  .envelope-body { width: 280px; }
-  .card { width: 260px; height: 400px; }
-  .card-title { font-size: 1.4rem; }
+  .qr-placeholder {
+    width: 60px;
+    height: 60px;
+  }
+  .mini-cards {
+    gap: 8px;
+  }
 }

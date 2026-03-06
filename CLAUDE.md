@@ -21,11 +21,14 @@ Single-page static site, no framework, no bundler.
 
 **UX state machine** (`script.js`):
 1. **Envelope** — tap to open (shake + CSS flap-fold animation)
-2. **Card front** — playing-card layout; tap to flip
-3. **Card back** — cycles through the `PUNS` array one at a time via "Next" button
-4. **Final message** — shown after last pun; tap anywhere to loop back to step 2
+2. **3 mini playing cards + ticker** — three independently flippable cards (QR front / riddle back); pun ticker scrolls below via CSS animation
+3. **Final message** — shown 700 ms after all 3 cards are flipped; tap anywhere to loop back to step 2
 
-State is held in plain JS variables (`currentPun`, `cardFlipped`). No frameworks, no state library.
+State is held in plain JS variables (`flipped[3]`). No frameworks, no state library.
+
+**Ticker**: `PUNS` strings are joined with ` ♦ ` and duplicated into two `<span>` elements inside `.ticker-track`. A CSS `@keyframes tickerScroll` animates `translateX(0 → -50%)` for a seamless infinite loop.
+
+**Mini cards**: each `.mini-card` wraps `.mini-card-inner` (3D flip container) with `.mini-card-front` (QR placeholder) and `.mini-card-back` (riddle). `perspective` is on the outer `.mini-card`; `transform-style: preserve-3d` and `backface-visibility: hidden` on inner faces.
 
 **Live reload** (`serve.py`): file watcher thread → `SimpleQueue` per connected SSE client → browser reloads only when version changes after baseline is established (avoids reload loop on fresh connect).
 
