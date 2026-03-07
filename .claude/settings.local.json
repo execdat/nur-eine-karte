@@ -6,7 +6,8 @@
       "Bash(python3 -c \":*)",
       "Bash(pkill -f \"python3 serve.py\")",
       "Bash(fuser -k 3000/tcp)",
-      "Bash(ls *.jpg *.png *.svg *.webp)"
+      "Bash(ls *.jpg *.png *.svg *.webp)",
+      "Bash(ls /home/alex-personal/Documents/nur-eine-karte/*.svg /home/alex-personal/Documents/nur-eine-karte/*.jpg /home/alex-personal/Documents/nur-eine-karte/*.png)"
     ]
   }
 }
