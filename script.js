@@ -16,7 +16,6 @@ const PUNS = [
 const envelopeWrapper = document.getElementById('envelope-wrapper');
 const cardWrapper     = document.getElementById('card-wrapper');
 const finalMessage    = document.getElementById('final-message');
-const scene           = document.getElementById('scene');
 const tickerTrack     = document.getElementById('ticker-track');
 
 // Fisher-Yates shuffle
@@ -58,31 +57,23 @@ envelopeWrapper.addEventListener('click', () => {
 
 // --- Mini cards: individual flip ---
 const miniCards = document.querySelectorAll('.mini-card');
-const flipped = [false, false, false];
-
-miniCards.forEach((card, i) => {
+miniCards.forEach(card => {
   card.addEventListener('click', () => {
-    flipped[i] = !flipped[i];
-    card.classList.toggle('flipped', flipped[i]);
-
-    // All 3 flipped → show final message
-    if (flipped.every(f => f)) {
-      setTimeout(() => {
-        cardWrapper.classList.add('hidden');
-        finalMessage.classList.remove('hidden');
-      }, 700);
-    }
+    card.classList.toggle('flipped');
   });
 });
 
-// --- Final message: tap anywhere to loop back ---
-scene.addEventListener('click', () => {
-  if (!finalMessage.classList.contains('hidden')) {
-    flipped.fill(false);
-    miniCards.forEach(c => c.classList.remove('flipped'));
+// --- Initial splash: tap to proceed to envelope ---
+function dismissSplash() {
+  finalMessage.classList.add('fading-out');
+  setTimeout(() => {
     finalMessage.classList.add('hidden');
-    cardWrapper.classList.remove('hidden');
-  }
-});
+    finalMessage.classList.remove('fading-out');
+    envelopeWrapper.classList.remove('hidden');
+  }, 400);
+}
+
+finalMessage.addEventListener('click', dismissSplash, { once: true });
+
 
 buildTicker();
