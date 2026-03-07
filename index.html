@@ -9,9 +9,23 @@
 </head>
 <body>
 
-  <div class="scene" id="scene">
+  <div class="scene">
 
-    <!-- Envelope / Card wrapper -->
+    <!-- Step 1: Splash screen — shown on load, tap to proceed -->
+    <div class="splash" id="splash">
+      <div class="splash-inner">
+        <p class="splash-emoji">🎂</p>
+        <p class="splash-title">Alles Gute zum Geburtstag!</p>
+        <p class="splash-body">
+          Du hast um eine Karte gebeten. Wir haben geliefert.<br />
+          <em>Technisch gesehen ;)</em>
+        </p>
+        <p class="splash-suits">♠ ♥ ♣ ♦</p>
+        <p class="tap-hint splash-hint">Tippen zum Fortfahren</p>
+      </div>
+    </div>
+
+    <!-- Step 2: Envelope — tap to open -->
     <div class="envelope-wrapper hidden" id="envelope-wrapper">
       <div class="envelope" id="envelope">
         <div class="envelope-paper"></div>
@@ -25,14 +39,14 @@
       </div>
     </div>
 
-    <!-- The 3 mini cards + ticker, revealed after envelope opens -->
+    <!-- Step 3: 3 mini cards + ticker — revealed after envelope opens -->
     <div class="card-wrapper hidden" id="card-wrapper">
       <p class="mini-hint">Tippen zum Umdrehen</p>
 
       <div class="mini-cards">
 
         <!-- Card 1 -->
-        <div class="mini-card" id="mini-card-0">
+        <div class="mini-card">
           <div class="mini-card-inner">
             <div class="mini-card-front">
               <span class="mc-corner mc-tl">♠</span>
@@ -47,7 +61,7 @@
         </div>
 
         <!-- Card 2 -->
-        <div class="mini-card" id="mini-card-1">
+        <div class="mini-card">
           <div class="mini-card-inner">
             <div class="mini-card-front">
               <span class="mc-corner mc-tl mc-corner--red">♥</span>
@@ -62,7 +76,7 @@
         </div>
 
         <!-- Card 3 -->
-        <div class="mini-card" id="mini-card-2">
+        <div class="mini-card">
           <div class="mini-card-inner">
             <div class="mini-card-front">
               <span class="mc-corner mc-tl">♣</span>
@@ -83,20 +97,6 @@
         <div class="ticker-track" id="ticker-track">
           <!-- filled by JS from PUNS array -->
         </div>
-      </div>
-    </div>
-
-    <!-- Final message -->
-    <div class="final-message" id="final-message">
-      <div class="final-inner">
-        <p class="final-emoji">🎂</p>
-        <p class="final-title">Alles Gute zum Geburtstag!</p>
-        <p class="final-body">
-          Du hast um eine Karte gebeten. Wir haben geliefert.<br />
-          <em>Technisch gesehen ;)</em>
-        </p>
-        <p class="final-suits">♠ ♥ ♣ ♦</p>
-        <p class="tap-hint final-hint">Tippen zum Fortfahren</p>
       </div>
     </div>
 

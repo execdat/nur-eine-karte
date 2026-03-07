@@ -6,10 +6,10 @@ An NFC tag links to [nur-eine-karte.org](https://nur-eine-karte.org), where the 
 
 ## Flow
 
-1. **Envelope** — tap to open it
-2. **3 mini playing cards** — each has a QR code on the front; tap to flip and reveal a riddle on the back
-3. **Pun ticker** — card puns scroll continuously beneath the cards
-4. **Final screen** — shown once all 3 cards are flipped; tap to loop back
+1. **Splash** — congratulation screen shown on load; tap to proceed
+2. **Envelope** — tap to open it
+3. **3 mini playing cards** — each has a QR code on the front; tap to flip and reveal a riddle on the back
+4. **Pun ticker** — card puns scroll continuously beneath the cards
 
 ## Customisation
 

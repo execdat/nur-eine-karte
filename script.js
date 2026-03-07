@@ -1,21 +1,13 @@
 // Puns about "only a card" — mix of German and English, card-themed
-// These are shown in the scrolling ticker at the bottom.
+// Shown in the scrolling ticker beneath the mini cards.
 const PUNS = [
-  '"Nur eine Karte" hast du gesagt. Hier ist sie. NFC-Karte. Zählt.',
-  'Wir haben die Regeln befolgt. Du hast nach einer Karte gefragt. Wild Card aktiviert. 🃏',
-  '„Card"-lich Glückwunsch zum Geburtstag! Wir nehmen unsere Versprechen sehr buchstäblich.',
-  'Was ist besser als ein Geschenk? Eine Karte mit einer Entschuldigung, warum kein Geschenk dabei ist.',
-  'Du hast gesagt: „Kein Stress, nur eine Karte." Wir haben das als Herausforderung verstanden. Challenge accepted. ♠',
+  'Du hast gesagt, du wünscht dir „nur eine Karte." Wir haben das als Herausforderung verstanden.',
   'Diese Karte ist: ✔ Recycelbar ✔ Nachhaltig ✔ Komplett ausreichend laut dir',
-  'Andere Leute kriegen Geschenke. Du kriegst genau das, worum du gebeten hast. Respekt. ♥',
-  'Wir hätten dir was gekauft, aber du meintest es ernst. Also: Ta-daa. ✨',
-  '„In Karten wir vertrauen." —Niemand, aber wir fanden es card-passend. ♣',
-  'Du wolltest nur eine Karte. Wir gaben dir eine Karte mit unendlich vielen Puns drin. Gerne. ♦',
 ];
 
+const splash          = document.getElementById('splash');
 const envelopeWrapper = document.getElementById('envelope-wrapper');
 const cardWrapper     = document.getElementById('card-wrapper');
-const finalMessage    = document.getElementById('final-message');
 const tickerTrack     = document.getElementById('ticker-track');
 
 // Fisher-Yates shuffle
@@ -28,10 +20,10 @@ function shuffle(arr) {
   return a;
 }
 
-// --- Build ticker from PUNS (shuffled, individual elements for spacing) ---
+// Build ticker from PUNS (shuffled). Two identical copies for a seamless
+// CSS loop: animating translateX(0 → -50%) scrolls exactly one copy width.
 function buildTicker() {
   const shuffled = shuffle(PUNS);
-  // Two identical copies for seamless loop; translateX(-50%) = one copy width
   for (let copy = 0; copy < 2; copy++) {
     const set = document.createElement('span');
     set.className = 'ticker-set';
@@ -45,7 +37,17 @@ function buildTicker() {
   }
 }
 
-// --- Envelope: tap to open ---
+// Step 1 → 2: tap splash to proceed to envelope
+splash.addEventListener('click', () => {
+  splash.classList.add('fading-out');
+  setTimeout(() => {
+    splash.classList.add('hidden');
+    splash.classList.remove('fading-out');
+    envelopeWrapper.classList.remove('hidden');
+  }, 400);
+}, { once: true });
+
+// Step 2 → 3: tap envelope to open it, then reveal cards
 envelopeWrapper.addEventListener('click', () => {
   envelopeWrapper.classList.add('opening');
   document.getElementById('envelope').classList.add('open');
@@ -55,25 +57,9 @@ envelopeWrapper.addEventListener('click', () => {
   }, 700);
 });
 
-// --- Mini cards: individual flip ---
-const miniCards = document.querySelectorAll('.mini-card');
-miniCards.forEach(card => {
-  card.addEventListener('click', () => {
-    card.classList.toggle('flipped');
-  });
+// Step 3: tap each mini card to flip it (QR front ↔ riddle back)
+document.querySelectorAll('.mini-card').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('flipped'));
 });
-
-// --- Initial splash: tap to proceed to envelope ---
-function dismissSplash() {
-  finalMessage.classList.add('fading-out');
-  setTimeout(() => {
-    finalMessage.classList.add('hidden');
-    finalMessage.classList.remove('fading-out');
-    envelopeWrapper.classList.remove('hidden');
-  }, 400);
-}
-
-finalMessage.addEventListener('click', dismissSplash, { once: true });
-
 
 buildTicker();

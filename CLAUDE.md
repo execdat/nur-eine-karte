@@ -20,11 +20,11 @@ GitHub Pages, `main` branch root → `nur-eine-karte.org` (configured via `CNAME
 Single-page static site, no framework, no bundler.
 
 **UX state machine** (`script.js`):
-1. **Envelope** — tap to open (shake + CSS flap-fold animation)
-2. **3 mini playing cards + ticker** — three independently flippable cards (QR front / riddle back); pun ticker scrolls below via CSS animation
-3. **Final message** — shown 700 ms after all 3 cards are flipped; tap anywhere to loop back to step 2
+1. **Splash** — congratulation screen shown on load; tap to proceed (fades out over 400 ms)
+2. **Envelope** — tap to open (shake + CSS flap-fold animation)
+3. **3 mini playing cards + ticker** — three independently flippable cards (QR front / riddle back); pun ticker scrolls below via CSS animation
 
-State is held in plain JS variables (`flipped[3]`). No frameworks, no state library.
+No frameworks, no state library.
 
 **Ticker**: `PUNS` strings are joined with ` ♦ ` and duplicated into two `<span>` elements inside `.ticker-track`. A CSS `@keyframes tickerScroll` animates `translateX(0 → -50%)` for a seamless infinite loop.
 
