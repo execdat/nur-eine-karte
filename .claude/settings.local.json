@@ -5,7 +5,8 @@
       "Bash(timeout 3 python3 serve.py)",
       "Bash(python3 -c \":*)",
       "Bash(pkill -f \"python3 serve.py\")",
-      "Bash(fuser -k 3000/tcp)"
+      "Bash(fuser -k 3000/tcp)",
+      "Bash(ls *.jpg *.png *.svg *.webp)"
     ]
   }
 }

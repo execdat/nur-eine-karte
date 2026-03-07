@@ -334,6 +334,13 @@ body::before {
 .mc-tl { top: 6px; left: 6px; }
 .mc-br { bottom: 6px; right: 6px; transform: rotate(180deg); }
 
+.qr-img {
+  width: 78px;
+  height: 78px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
 .qr-placeholder {
   width: 78px;
   height: 78px;
@@ -419,6 +426,10 @@ body::before {
   .mini-card {
     width: 100px;
     height: 140px;
+  }
+  .qr-img {
+    width: 60px;
+    height: 60px;
   }
   .qr-placeholder {
     width: 60px;
