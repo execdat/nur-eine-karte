@@ -3,6 +3,14 @@
 const PUNS = [
   'Du hast gesagt, du wünscht dir „nur eine Karte." Wir haben das als Herausforderung verstanden.',
   'Diese Karte ist: ✔ Recycelbar ✔ Nachhaltig ✔ Komplett ausreichend laut dir',
+  'Du hast uns durch DSE gecarried. Jetzt wollten wir dir mal zeigen, dass wir auch was deployen können.',
+  'Technisch gesehen sind das drei Karten: Geburtstagskarte, NFC-Karte, Website. Card-ception. Du hast bekommen, worum du gebeten hast — mal drei.',
+  'Cloud Native, DSE, Exkursion-Logistics — du managed alles außer deine eigenen Geburtstagserwartungen. Respekt.',
+  'Wer zahlt die nächste Runde? Keine Ahnung. Wir haben den Überblick verloren. Aber diese Karte hier — die ist definitiv auf uns.',
+  'Happy 30th! Du bist jetzt offiziell legacy. Aber keine Sorge — wir deployen noch regelmäßig Updates auf der Exkursion.',
+  'In der DSE-Vorlesung: Tom carried. In Cloud Native: Tom carried. Bei der Exkursion: Tom schlägt vor zu zahlen. Muster erkannt.',
+  'Zum 30. Geburtstag bekommst du genau das, was du bestellt hast. Keine hidden dependencies. Keine breaking changes. Nur eine Karte.',
+  'Nächste Exkursion zahlen wir — versprochen. Diese Aussage ist nicht rechtsverbindlich und wird wahrscheinlich wieder diskutiert.',
 ];
 
 const splash          = document.getElementById('splash');
